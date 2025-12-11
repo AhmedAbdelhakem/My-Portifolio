@@ -102,10 +102,18 @@ h6 {
 
 /* Typography Classes */
 .text-display {
-  font-size: clamp(3rem, 12vw, 10rem);
+  font-size: clamp(2.5rem, 6vw, 6rem);
   font-weight: 900;
   letter-spacing: -0.03em;
-  line-height: 0.95;
+  line-height: 1.1;
+  word-wrap: break-word;
+}
+
+.text-mega {
+  font-size: clamp(3rem, 9vw, 9rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.85;
 }
 
 .text-heading-xl {

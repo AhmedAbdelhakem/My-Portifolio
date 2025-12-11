@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import magicSphereVideo from '../assets/3d-liquid-magic-sphere.mp4';
+import { HERO_TEXT } from '../constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,11 +11,7 @@ function Hero() {
     const textRef = useRef(null);
     const videoRef = useRef(null);
 
-    const lines = [
-        "HI! I'M AHMED",
-        "FLUTTER DEVELOPER",
-        "FRONTEND ENGINEER"
-    ];
+    const lines = HERO_TEXT.LINES;
 
     useEffect(() => {
         const allChars = textRef.current.querySelectorAll('.char');
@@ -84,26 +81,10 @@ function Hero() {
         <section
             id="home"
             ref={containerRef}
-            style={{
-                minHeight: '500vh',
-                background: 'var(--color-bg-primary)',
-                position: 'relative',
-                overflow: 'hidden'
-            }}
+            className="relative min-h-[500vh] overflow-hidden bg-[--color-bg-primary]"
         >
             {/* Background Video - Loop */}
-            <div
-                style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100vw',
-                    height: '100vh',
-                    zIndex: 0, // Behind text
-                    pointerEvents: 'none',
-                    opacity: 0.6,
-                }}
-            >
+            <div className="fixed top-0 left-0 z-0 h-screen w-screen pointer-events-none opacity-60">
                 <video
                     ref={videoRef}
                     src={magicSphereVideo}
@@ -111,78 +92,31 @@ function Hero() {
                     loop
                     muted
                     playsInline
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                    }}
+                    className="h-full w-full object-cover"
                 />
                 {/* Overlay gradient */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        background: 'linear-gradient(to bottom, transparent, #000)',
-                        opacity: 0.8
-                    }}
-                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-80" />
             </div>
 
             <div
                 ref={textRef}
-                style={{
-                    minHeight: '100vh',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100%',
-                    position: 'relative',
-                    zIndex: 10,
-                }}
+                className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center"
             >
                 {lines.map((line, index) => (
                     <h1
                         key={index}
-                        className="text-display"
-                        style={{
-                            textAlign: 'center',
-                            marginBottom: index < lines.length - 1 ? '0' : '0',
-                        }}
+                        className="text-display text-center m-0"
                     >
                         {renderLine(line, index)}
                     </h1>
                 ))}
 
                 {/* Simple scroll indicator */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        bottom: '40px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        gap: '12px',
-                    }}
-                >
-                    <span
-                        className="text-small animate-pulse"
-                        style={{ letterSpacing: '0.3em' }}
-                    >
-                        scroll to reveal
+                <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
+                    <span className="text-small animate-pulse tracking-[0.3em]">
+                        {HERO_TEXT.SCROLL_INDICATOR}
                     </span>
-                    <div
-                        style={{
-                            width: '1px',
-                            height: '60px',
-                            background: 'linear-gradient(to bottom, var(--color-text-muted), transparent)',
-                        }}
-                    />
+                    <div className="h-[60px] w-px bg-gradient-to-b from-[--color-text-muted] to-transparent" />
                 </div>
             </div>
         </section>

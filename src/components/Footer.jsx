@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { NAV_LINKS, SOCIAL_LINKS, CONTACT_INFO, HERO_TEXT } from '../constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,54 +54,27 @@ function Footer() {
         };
     }, []);
 
-    const links = [
-        { name: 'Home', href: '#home' },
-        { name: 'Work', href: '#works' },
-        { name: 'About', href: '#about' },
-        { name: 'Contact', href: '#contact' },
-    ];
-
-    const socials = [
-        { name: 'Email', href: 'mailto:ahmedabdelhakem199@gmail.com' },
-        { name: 'LinkedIn', href: 'https://linkedin.com' },
-        { name: 'WhatsApp', href: 'https://wa.me/201104742253' },
-        { name: 'GitHub', href: 'https://github.com' },
-    ];
+    const links = NAV_LINKS;
+    const socials = SOCIAL_LINKS;
 
     return (
         <footer
             id="contact"
             ref={footerRef}
-            style={{
-                padding: '80px 0',
-                background: 'var(--bg-primary)',
-                borderTop: '1px solid var(--border-subtle)',
-            }}
+            className="py-20 bg-[--bg-primary]"
         >
             <div className="container">
                 {/* Footer Grid */}
-                <div
-                    className="footer-grid"
-                    style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                        gap: '48px',
-                        marginBottom: '80px',
-                    }}
-                >
+                <div className="footer-grid grid gap-12 mb-20 md:grid-cols-2 lg:grid-cols-4">
                     {/* Links */}
                     <div>
-                        <h4 className="text-small" style={{ marginBottom: '24px' }}>Links</h4>
-                        <ul style={{ listStyle: 'none' }}>
+                        <h4 className="text-small mb-6">Links</h4>
+                        <ul className="list-none">
                             {links.map((link) => (
-                                <li key={link.name} style={{ marginBottom: '16px' }}>
+                                <li key={link.name} className="mb-4">
                                     <a
                                         href={link.href}
-                                        className="link-underline"
-                                        style={{
-                                            fontSize: '1.5rem',
-                                            fontWeight: 300,
-                                        }}
+                                        className="link-underline text-xl md:text-2xl font-light"
                                     >
                                         {link.name}
                                     </a>
@@ -111,19 +85,15 @@ function Footer() {
 
                     {/* Socials */}
                     <div>
-                        <h4 className="text-small" style={{ marginBottom: '24px' }}>Socials</h4>
-                        <ul style={{ listStyle: 'none' }}>
+                        <h4 className="text-small mb-6">Socials</h4>
+                        <ul className="list-none">
                             {socials.map((social) => (
-                                <li key={social.name} style={{ marginBottom: '16px' }}>
+                                <li key={social.name} className="mb-4">
                                     <a
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="link-underline"
-                                        style={{
-                                            fontSize: '1.5rem',
-                                            fontWeight: 300,
-                                        }}
+                                        className="link-underline text-xl md:text-2xl font-light"
                                     >
                                         {social.name}
                                     </a>
@@ -134,53 +104,33 @@ function Footer() {
 
                     {/* Local Time */}
                     <div>
-                        <h4 className="text-small" style={{ marginBottom: '24px' }}>Local Time</h4>
-                        <p style={{ fontSize: '2rem', fontWeight: 300 }}>{localTime}</p>
-                        <p className="text-small" style={{ marginTop: '8px' }}>Cairo, Egypt</p>
+                        <h4 className="text-small mb-6">Local Time</h4>
+                        <p className="text-2xl md:text-4xl font-light">{localTime}</p>
+                        <p className="text-small mt-2">Cairo, Egypt</p>
                     </div>
 
                     {/* Contact */}
                     <div>
-                        <h4 className="text-small" style={{ marginBottom: '24px' }}>Get In Touch</h4>
+                        <h4 className="text-small mb-6">Get In Touch</h4>
                         <a
-                            href="tel:+201104742253"
-                            className="link-underline"
-                            style={{
-                                display: 'block',
-                                fontSize: '1.125rem',
-                                fontWeight: 300,
-                                marginBottom: '12px',
-                            }}
+                            href={`tel:${CONTACT_INFO.PHONE.replace(/\s/g, '')}`}
+                            className="link-underline block text-lg font-light mb-3"
                         >
-                            +20 110 474 2253
+                            {CONTACT_INFO.PHONE_DISPLAY}
                         </a>
                         <a
-                            href="mailto:ahmedabdelhakem199@gmail.com"
-                            className="link-underline"
-                            style={{
-                                display: 'block',
-                                fontSize: '1.125rem',
-                                fontWeight: 300,
-                            }}
+                            href={`mailto:${CONTACT_INFO.EMAIL}`}
+                            className="link-underline block text-lg font-light"
                         >
-                            ahmedabdelhakem199@gmail.com
+                            {CONTACT_INFO.EMAIL}
                         </a>
                     </div>
                 </div>
 
                 {/* Version Row */}
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        marginBottom: '60px',
-                        flexWrap: 'wrap',
-                        gap: '16px',
-                    }}
-                >
-                    <span className="text-small">2025 © Edition</span>
-                    <span className="text-small">Designed & Developed by Ahmed</span>
+                <div className="flex flex-wrap justify-between items-center gap-4 mb-16">
+                    <span className="text-small">{CONTACT_INFO.COPYRIGHT}</span>
+                    <span className="text-small">{CONTACT_INFO.DESIGNER}</span>
                 </div>
 
                 {/* Large Name */}
@@ -192,20 +142,11 @@ function Footer() {
                     }}
                 >
                     <h2
-                        style={{
-                            fontSize: 'clamp(4rem, 20vw, 18rem)',
-                            fontWeight: 900,
-                            lineHeight: 0.85,
-                            letterSpacing: '-0.03em',
-                            color: 'var(--bg-card)',
-                            cursor: 'default',
-                            userSelect: 'none',
-                            transition: 'color 0.5s ease',
-                        }}
+                        className="text-mega text-[--bg-card] cursor-default select-none transition-colors duration-500"
                         onMouseEnter={(e) => e.target.style.color = 'var(--bg-card-hover)'}
                         onMouseLeave={(e) => e.target.style.color = 'var(--bg-card)'}
                     >
-                        AHMED
+                        {HERO_TEXT.NAME}
                     </h2>
                 </div>
             </div>

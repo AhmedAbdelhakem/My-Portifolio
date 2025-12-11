@@ -1,45 +1,14 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { PROJECTS } from '../constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function Projects() {
     const sectionRef = useRef(null);
     const projectsRef = useRef([]);
-
-    const projects = [
-        {
-            title: 'Articles App',
-            description: 'Flutter-based news application with clean architecture and modern UI design.',
-            tags: ['Flutter', 'Dart', 'API'],
-            emoji: '📰',
-        },
-        {
-            title: 'Instagram Clone',
-            description: 'Full-featured social media app with authentication, posts, and real-time updates.',
-            tags: ['Flutter', 'Firebase', 'Auth'],
-            emoji: '📷',
-        },
-        {
-            title: 'Shopping API',
-            description: 'RESTful API for e-commerce with product management and order processing.',
-            tags: ['Flutter', 'REST API', 'E-commerce'],
-            emoji: '🛒',
-        },
-        {
-            title: 'Video Call Integration',
-            description: 'Real-time video calling functionality using Flutter and WebRTC technology.',
-            tags: ['Flutter', 'WebRTC', 'Real-time'],
-            emoji: '📹',
-        },
-        {
-            title: 'Liquid Glass UI',
-            description: 'Modern glassmorphism UI components with smooth animations and effects.',
-            tags: ['Flutter', 'UI/UX', 'Animations'],
-            emoji: '✨',
-        },
-    ];
+    const projects = PROJECTS;
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -81,11 +50,11 @@ function Projects() {
         <section id="works" ref={sectionRef} className="section">
             <div className="container">
                 {/* Section Header */}
-                <div className="projects-header" style={{ marginBottom: '80px' }}>
-                    <h2 className="text-heading-xl" style={{ marginBottom: '16px' }}>
+                <div className="projects-header mb-20">
+                    <h2 className="text-heading-xl mb-4">
                         WORKS
                     </h2>
-                    <p className="text-body" style={{ maxWidth: '500px' }}>
+                    <p className="text-body max-w-[500px]">
                         Explore my journey and the projects that define my craft.
                     </p>
                 </div>
@@ -96,24 +65,11 @@ function Projects() {
                         <div
                             key={index}
                             ref={(el) => (projectsRef.current[index] = el)}
-                            className="card"
-                            style={{
-                                cursor: 'pointer',
-                                padding: 0,
-                                overflow: 'hidden',
-                            }}
+                            className="card p-0 overflow-hidden cursor-pointer"
                         >
                             {/* Project Image/Emoji Area */}
                             <div
-                                style={{
-                                    aspectRatio: '4/3',
-                                    background: 'linear-gradient(135deg, var(--bg-card-hover), var(--bg-card))',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '4rem',
-                                    transition: 'transform 0.5s ease',
-                                }}
+                                className="aspect-[4/3] flex items-center justify-center text-[4rem] bg-gradient-to-br from-[--bg-card-hover] to-[--bg-card] transition-transform duration-500 ease-out hover:scale-105"
                                 onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                                 onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                             >
@@ -121,36 +77,18 @@ function Projects() {
                             </div>
 
                             {/* Project Info */}
-                            <div style={{ padding: '24px' }}>
-                                <h3
-                                    style={{
-                                        fontSize: '1.25rem',
-                                        fontWeight: 600,
-                                        marginBottom: '8px',
-                                        color: 'var(--text-primary)',
-                                    }}
-                                >
+                            <div className="p-6">
+                                <h3 className="text-xl font-semibold mb-2 text-[--text-primary]">
                                     {project.title}
                                 </h3>
-                                <p
-                                    className="text-body"
-                                    style={{
-                                        fontSize: '0.875rem',
-                                        marginBottom: '16px',
-                                        display: '-webkit-box',
-                                        WebkitLineClamp: 2,
-                                        WebkitBoxOrient: 'vertical',
-                                        overflow: 'hidden',
-                                    }}
-                                >
+                                <p className="text-body text-sm mb-4 line-clamp-2">
                                     {project.description}
                                 </p>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                                <div className="flex flex-wrap gap-1.5">
                                     {project.tags.map((tag, i) => (
                                         <span
                                             key={i}
-                                            className="tag"
-                                            style={{ fontSize: '0.65rem', padding: '4px 10px' }}
+                                            className="tag text-[0.65rem] px-2.5 py-1"
                                         >
                                             {tag}
                                         </span>
@@ -162,7 +100,7 @@ function Projects() {
                 </div>
 
                 {/* View All Button */}
-                <div style={{ marginTop: '60px', textAlign: 'center' }}>
+                <div className="mt-15 text-center">
                     <button className="btn btn-secondary">
                         View All Projects
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">

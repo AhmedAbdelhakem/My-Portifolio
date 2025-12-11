@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { NAV_LINKS, HERO_TEXT } from '../constants';
 
 function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -12,49 +13,27 @@ function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Works', href: '#works' },
-        { name: 'Contact', href: '#contact' },
-    ];
-
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass' : ''
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass py-4' : 'py-6'
                 }`}
-            style={{
-                padding: scrolled ? '16px 0' : '24px 0',
-            }}
         >
-            <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div className="container flex items-center justify-between">
                 {/* Logo */}
                 <a
                     href="#home"
-                    style={{
-                        fontSize: '1.25rem',
-                        fontWeight: 700,
-                        letterSpacing: '0.1em',
-                        color: 'var(--text-primary)',
-                        textDecoration: 'none',
-                    }}
+                    className="text-xl font-bold tracking-[0.1em] text-[--text-primary] no-underline"
                 >
-                    AHMED
+                    {HERO_TEXT.NAME}
                 </a>
 
                 {/* Desktop Navigation */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }} className="hidden md:flex">
-                    {navLinks.map((link) => (
+                <div className="hidden md:flex items-center gap-8">
+                    {NAV_LINKS.map((link) => (
                         <a
                             key={link.name}
                             href={link.href}
-                            className="link-underline"
-                            style={{
-                                fontSize: '0.75rem',
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.15em',
-                                fontWeight: 500,
-                            }}
+                            className="link-underline text-xs uppercase tracking-[0.15em] font-medium"
                         >
                             {link.name}
                         </a>
@@ -64,79 +43,35 @@ function Navbar() {
                 {/* Mobile Menu Button */}
                 <button
                     onClick={() => setMenuOpen(!menuOpen)}
-                    className="md:hidden"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '5px',
-                        padding: '8px',
-                        background: 'transparent',
-                        border: 'none',
-                        cursor: 'pointer',
-                    }}
+                    className="md:hidden flex flex-col gap-[5px] p-2 bg-transparent border-none cursor-pointer"
                 >
                     <span
-                        style={{
-                            width: '24px',
-                            height: '2px',
-                            background: 'var(--text-primary)',
-                            transition: 'all 0.3s ease',
-                            transform: menuOpen ? 'rotate(45deg) translateY(7px)' : 'none',
-                        }}
+                        className={`w-6 h-0.5 bg-[--text-primary] transition-all duration-300 ease-in-out ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''
+                            }`}
                     />
                     <span
-                        style={{
-                            width: '24px',
-                            height: '2px',
-                            background: 'var(--text-primary)',
-                            transition: 'all 0.3s ease',
-                            opacity: menuOpen ? 0 : 1,
-                        }}
+                        className={`w-6 h-0.5 bg-[--text-primary] transition-all duration-300 ease-in-out ${menuOpen ? 'opacity-0' : 'opacity-100'
+                            }`}
                     />
                     <span
-                        style={{
-                            width: '24px',
-                            height: '2px',
-                            background: 'var(--text-primary)',
-                            transition: 'all 0.3s ease',
-                            transform: menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none',
-                        }}
+                        className={`w-6 h-0.5 bg-[--text-primary] transition-all duration-300 ease-in-out ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''
+                            }`}
                     />
                 </button>
             </div>
 
             {/* Mobile Menu */}
             <div
-                className="glass md:hidden"
-                style={{
-                    position: 'absolute',
-                    top: '100%',
-                    left: 0,
-                    right: 0,
-                    padding: menuOpen ? '32px 0' : '0',
-                    opacity: menuOpen ? 1 : 0,
-                    visibility: menuOpen ? 'visible' : 'hidden',
-                    transition: 'all 0.3s ease',
-                    maxHeight: menuOpen ? '400px' : '0',
-                    overflow: 'hidden',
-                }}
+                className={`glass md:hidden absolute top-full left-0 right-0 transition-all duration-300 ease-in-out overflow-hidden ${menuOpen ? 'py-8 opacity-100 visible max-h-[400px]' : 'py-0 opacity-0 invisible max-h-0'
+                    }`}
             >
-                <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                    {navLinks.map((link) => (
+                <div className="container flex flex-col gap-6">
+                    {NAV_LINKS.map((link) => (
                         <a
                             key={link.name}
                             href={link.href}
                             onClick={() => setMenuOpen(false)}
-                            style={{
-                                fontSize: '1.5rem',
-                                fontWeight: 300,
-                                letterSpacing: '0.1em',
-                                color: 'var(--text-secondary)',
-                                textDecoration: 'none',
-                                transition: 'color 0.3s ease',
-                            }}
-                            onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'}
-                            onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}
+                            className="text-2xl font-light tracking-[0.1em] text-[--text-secondary] no-underline transition-colors duration-300 hover:text-[--text-primary]"
                         >
                             {link.name}
                         </a>
