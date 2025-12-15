@@ -14,12 +14,12 @@ A modern, high-performance portfolio website built with **React**, **Vite**, **T
 
 ### 🎥 Hero Section
 - **Dynamic Background**: Continuous, looping 3D liquid sphere video (`3d-liquid-magic-sphere.mp4`).
-- **Text Reveal**: Character-by-character text reveal animation ("HELLO! I'M AHMED ABDELHAKEEM") that fades from transparent to white on scroll.
+- **Text Reveal**: Advanced character-level staggered reveal animation triggered by scroll.
 - **Scroll Indicator**: Animated scroll prompt guiding users to explore further.
 
 ### 🎨 Clean & Modern Design
 - **Theme**: Minimalist Black & White (Dark Mode default).
-- **Typography**: Responsive typography using fluid `clamp()` values for perfect scaling on Mobile, Tablet, and Desktop.
+- **Typography**: Fluid typography using precision `clamp()` values. Text scales seamlessly from small mobile devices (320px) to large 4K screens.
 - **Glassmorphism**: Subtle glass effects on the Navbar for a premium feel.
 
 ### 🏗️ Architecture
@@ -69,8 +69,8 @@ src/
 
 ## 🔄 Recent Updates
 
-- **Global Text Update**: Updated all references to "Ahmed Abdelhakeem".
-- **Responsive Sizing**: Optimized Hero and Footer typography to handle longer names without breaking layout.
+- **Hero Animation**: Refined entrance animation to use character-level staggering for a cinematic "typing" effect.
+- **Mobile Optimization**: Fine-tuned font sizes and spacing for smaller devices (iPhone SE, etc.) using `clamp` and `white-space` utilities.
 - **Refactoring**: Converted all inline styles to Tailwind CSS utility classes.
 - **Data Extraction**: Moved all hardcoded text to `src/constants/index.js` for easy maintenance.
 
