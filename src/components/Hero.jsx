@@ -8,55 +8,57 @@ gsap.registerPlugin(ScrollTrigger);
 
 function Hero() {
     const containerRef = useRef(null);
-    const textRef = useRef(null);
-    const videoRef = useRef(null);
-
+    const contentRef = useRef(null);
     const lines = HERO_TEXT.LINES;
 
     useEffect(() => {
-        const allChars = textRef.current.querySelectorAll('.char');
-
         const ctx = gsap.context(() => {
-            // Initial text state: Transparent white
-            gsap.set(allChars, {
-                color: 'rgba(255, 255, 255, 0)',
-                textShadow: 'none'
+            // Select all characters of each line
+            const line1Chars = containerRef.current.querySelectorAll('.line-0 .char');
+            const line2Chars = containerRef.current.querySelectorAll('.line-1 .char');
+            const line3Chars = containerRef.current.querySelectorAll('.line-2 .char');
+
+            // Initial state: Hidden
+            gsap.set([line1Chars, line2Chars, line3Chars], { opacity: 0, y: 30 });
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 1,
+                    pin: contentRef.current,
+                }
             });
 
-            // Text Reveal Animation aligned with scroll
-            ScrollTrigger.create({
-                trigger: containerRef.current,
-                start: 'top top',
-                end: 'bottom bottom',
-                scrub: 1, // Smooth scrolling effect
-                pin: textRef.current, // Pin the text while animating
-                onUpdate: (self) => {
-                    const progress = self.progress;
-                    const totalChars = allChars.length;
-
-                    // Animate each character based on scroll progress
-                    allChars.forEach((char, index) => {
-                        const charStart = index / totalChars;
-                        const charEnd = (index + 1) / totalChars;
-
-                        let charProgress = 0;
-                        if (progress >= charEnd) {
-                            charProgress = 1;
-                        } else if (progress > charStart) {
-                            charProgress = (progress - charStart) / (charEnd - charStart);
-                            charProgress = charProgress * charProgress * charProgress;
-                        }
-
-                        // Interpolate alpha from 0 to 1 (transparent to white)
-                        gsap.set(char, {
-                            color: `rgba(255, 255, 255, ${charProgress})`,
-                            textShadow: charProgress > 0.5
-                                ? `0 0 ${charProgress * 30}px rgba(255, 255, 255, ${charProgress * 0.2})`
-                                : 'none',
-                        });
-                    });
-                },
+            // Step 1: Reveal Line 1 Characters
+            tl.to(line1Chars, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.03,
+                ease: 'power2.out'
             });
+
+            // Step 2: Reveal Line 2 Characters
+            // Added delay to separate steps
+            tl.to(line2Chars, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.03,
+                ease: 'power2.out'
+            }, "+=0.2");
+
+            // Step 3: Reveal Line 3 Characters
+            tl.to(line3Chars, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.03,
+                ease: 'power2.out'
+            }, "+=0.2");
+
         }, containerRef);
 
         return () => ctx.revert();
@@ -66,13 +68,12 @@ function Hero() {
         return text.split('').map((char, charIndex) => (
             <span
                 key={`${lineIndex}-${charIndex}`}
-                className="char"
+                className="char inline-block"
                 style={{
-                    display: 'inline-block',
-                    whiteSpace: char === ' ' ? 'pre' : 'normal',
+                    whiteSpace: char === ' ' ? 'pre-wrap' : 'normal',
                 }}
             >
-                {char === ' ' ? '\u00A0' : char}
+                {char}
             </span>
         ));
     };
@@ -81,12 +82,11 @@ function Hero() {
         <section
             id="home"
             ref={containerRef}
-            className="relative min-h-[500vh] overflow-hidden bg-[--color-bg-primary]"
+            className="relative min-h-[350vh] overflow-hidden bg-[--color-bg-primary]"
         >
             {/* Background Video - Loop */}
             <div className="fixed top-0 left-0 z-0 h-screen w-screen pointer-events-none opacity-60">
                 <video
-                    ref={videoRef}
                     src={magicSphereVideo}
                     autoPlay
                     loop
@@ -99,21 +99,27 @@ function Hero() {
             </div>
 
             <div
-                ref={textRef}
-                className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center"
+                ref={contentRef}
+                className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center p-4"
             >
-                {lines.map((line, index) => (
-                    <h1
-                        key={index}
-                        className="text-display text-center m-0"
-                    >
-                        {renderLine(line, index)}
-                    </h1>
-                ))}
+                <div className="flex flex-col items-center justify-center gap-4 md:gap-6 text-center">
+                    {lines.map((line, index) => (
+                        <h1
+                            key={index}
+                            className={`text-display m-0 line-${index} ${index === 0 ? 'mb-4' : ''}`}
+                            style={{
+                                fontSize: index === 0 ? 'clamp(1.5rem, 4vw, 3.5rem)' : 'clamp(1rem, 3vw, 2.5rem)',
+                                color: index === 0 ? 'white' : 'var(--text-secondary)'
+                            }}
+                        >
+                            {renderLine(line, index)}
+                        </h1>
+                    ))}
+                </div>
 
                 {/* Simple scroll indicator */}
                 <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3">
-                    <span className="text-small animate-pulse tracking-[0.3em]">
+                    <span className="text-small animate-pulse tracking-[0.3em] opacity-70">
                         {HERO_TEXT.SCROLL_INDICATOR}
                     </span>
                     <div className="h-[60px] w-px bg-gradient-to-b from-[--color-text-muted] to-transparent" />

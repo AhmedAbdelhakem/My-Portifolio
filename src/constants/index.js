@@ -3,6 +3,7 @@ export const NAV_LINKS = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Works', href: '#works' },
+    { name: 'Experience', href: '#experience' },
     { name: 'Contact', href: '#contact' },
 ];
 
@@ -11,8 +12,8 @@ export const HERO_TEXT = {
     NAME: "AHMED ABDELHAKEEM",
     LINES: [
         "HELLO! I'M AHMED ABDELHAKEEM",
-        "FLUTTER DEVELOPER",
-        "FRONTEND ENGINEER"
+        "FLUTTER DEVELOPER &",
+        "FRONTEND DEVELOPER"
     ],
     SCROLL_INDICATOR: "scroll to reveal"
 };
@@ -20,7 +21,7 @@ export const HERO_TEXT = {
 // About Section
 export const ABOUT_STATS = [
     { number: '2+', label: 'Years of Experience' },
-    { number: '6+', label: 'Projects Completed' },
+    { number: '10+', label: 'Projects Completed' },
 ];
 
 export const SERVICES = [
@@ -35,9 +36,9 @@ export const SERVICES = [
         skills: ['JavaScript', 'Tailwind CSS', 'GSAP', 'HTML/CSS'],
     },
     {
-        title: 'API & Backend',
-        description: 'Developing RESTful APIs and backend architectures with focus on performance optimization and secure data handling.',
-        skills: ['RESTful APIs', 'Python', 'Caching', 'Performance'],
+        title: 'Backend & Database',
+        description: 'Developing RESTful APIs, optimizing database performance, and ensuring secure data handling with modern backend technologies.',
+        skills: ['RESTful APIs', 'Firebase', 'PostgreSQL', 'Performance'],
     },
     {
         title: 'UI/UX Design',
@@ -46,38 +47,67 @@ export const SERVICES = [
     },
 ];
 
+export const EXPERIENCES = [
+    {
+        role: "Flutter & Frontend Developer",
+        company: "INSITE OOH / OUTSITE Billboards",
+        duration: "Mar 2023 – Present",
+        description: "Leading the development of scalable mobile and web applications for the digital and out-of-home landscape. Built custom 2D/3D map inventory systems and maintained RESTful API architectures.",
+        link: "https://outsiteooh.com/",
+        skills: ["Flutter", "React", "WordPress", "3D/2D Maps", "REST API", "Tailwind CSS", "Firebase", "Agile"],
+        achievements: [
+            "Developed responsive website with custom 3D/2D map inventory system",
+            "Built and maintained RESTful API backend to enhance scalability",
+            "Created reusable components using Business logic and Tailwind CSS",
+            "Optimized UI/UX for better user engagement and conversion"
+        ]
+    }
+];
+
 // Projects Section
 // Note: You can replace the emoji with actual image paths if available
 export const PROJECTS = [
     {
-        title: 'Articles App',
-        description: 'Flutter-based news application with clean architecture and modern UI design.',
-        tags: ['Flutter', 'Dart', 'API'],
+        title: 'Articles-App',
+        description: 'Welcome to the documentation for Articles-App! This site will help you understand, install, use, and contribute to the Articles-App project.',
+        tags: ['Dart', 'Objective-C', 'Java'],
         emoji: '📰',
+        link: 'https://github.com/AhmedAbdelhakem/Articles-App'
     },
     {
-        title: 'Instagram Clone',
-        description: 'Full-featured social media app with authentication, posts, and real-time updates.',
-        tags: ['Flutter', 'Firebase', 'Auth'],
+        title: 'instegram-firebase',
+        description: 'A Flutter application template that integrates with Firebase to provide core social media features similar to Instagram.',
+        tags: ['Dart', 'Firebase', 'Flutter'],
         emoji: '📷',
+        link: 'https://github.com/AhmedAbdelhakem/instegam-firebase'
     },
     {
-        title: 'Shopping API',
-        description: 'RESTful API for e-commerce with product management and order processing.',
-        tags: ['Flutter', 'REST API', 'E-commerce'],
+        title: 'shopping-API',
+        description: 'A robust backend API for shopping applications, built with modern best practices.',
+        tags: ['Dart', 'API', 'Backend'],
         emoji: '🛒',
+        link: 'https://github.com/AhmedAbdelhakem/shopping-API'
     },
     {
-        title: 'Video Call Integration',
-        description: 'Real-time video calling functionality using Flutter and WebRTC technology.',
-        tags: ['Flutter', 'WebRTC', 'Real-time'],
+        title: 'TEC-TAC-TOE',
+        description: 'A simple and interactive Tic-Tac-Toe game application built to demonstrate core programming concepts and user interface design.',
+        tags: ['Dart', 'Game', 'Flutter'],
+        emoji: '🎲',
+        link: 'https://github.com/AhmedAbdelhakem/TEC-TAC-TOE'
+    },
+    {
+        title: 'Videocall-Integration-app',
+        description: 'A Flutter application for seamless video call integration, demonstrating how to add real-time video communication features.',
+        tags: ['Flutter', 'Video', 'Real-time'],
         emoji: '📹',
+        link: 'https://github.com/AhmedAbdelhakem/Videocall-Integration-app'
     },
     {
-        title: 'Liquid Glass UI',
-        description: 'Modern glassmorphism UI components with smooth animations and effects.',
-        tags: ['Flutter', 'UI/UX', 'Animations'],
+        title: 'Liquid-Glass-UI',
+        description: 'A visually stunning Flutter UI demo project featuring modern glassmorphism and liquid-style design elements.',
+        tags: ['UI/UX', 'Glassmorphism'],
         emoji: '✨',
+        link: 'https://github.com/AhmedAbdelhakem/Liquid-Glass-UI'
     },
 ];
 

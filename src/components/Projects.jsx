@@ -50,7 +50,7 @@ function Projects() {
         <section id="works" ref={sectionRef} className="section">
             <div className="container">
                 {/* Section Header */}
-                <div className="projects-header mb-20">
+                <div className="projects-header mb-20 flex flex-col items-center justify-center">
                     <h2 className="text-heading-xl mb-4">
                         WORKS
                     </h2>
@@ -62,10 +62,13 @@ function Projects() {
                 {/* Projects Grid */}
                 <div className="grid-3">
                     {projects.map((project, index) => (
-                        <div
+                        <a
                             key={index}
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             ref={(el) => (projectsRef.current[index] = el)}
-                            className="card p-0 overflow-hidden cursor-pointer"
+                            className="card p-0 overflow-hidden block"
                         >
                             {/* Project Image/Emoji Area */}
                             <div
@@ -95,18 +98,18 @@ function Projects() {
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
 
                 {/* View All Button */}
                 <div className="mt-15 text-center">
-                    <button className="btn btn-secondary">
+                    <a href='https://github.com/AhmedAbdelhakem?tab=repositories' target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                         View All Projects
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>
