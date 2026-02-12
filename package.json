@@ -4,7 +4,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "echo \"No tests yet\""
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
