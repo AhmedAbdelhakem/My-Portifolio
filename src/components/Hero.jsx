@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import magicSphereVideo from '../assets/3d-liquid-magic-sphere.mp4';
@@ -9,9 +9,11 @@ gsap.registerPlugin(ScrollTrigger);
 function Hero() {
     const containerRef = useRef(null);
     const contentRef = useRef(null);
+    const [videoLoaded, setVideoLoaded] = useState(false);
     const lines = HERO_TEXT.LINES;
 
     useEffect(() => {
+        setVideoLoaded(true);
         const ctx = gsap.context(() => {
             // Select all characters of each line
             const line1Chars = containerRef.current.querySelectorAll('.line-0 .char');
@@ -87,7 +89,8 @@ function Hero() {
             {/* Background Video - Loop */}
             <div className="fixed top-0 left-0 z-0 h-screen w-screen pointer-events-none opacity-60">
                 <video
-                    src={magicSphereVideo}
+                    src={videoLoaded ? magicSphereVideo : undefined}
+                    preload="metadata"
                     autoPlay
                     loop
                     muted
@@ -95,7 +98,7 @@ function Hero() {
                     className="h-full w-full object-cover"
                 />
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-80" />
+                <div className="absolute inset-0 bg-linear-to-b from-transparent to-black opacity-80" />
             </div>
 
             <div
@@ -122,7 +125,7 @@ function Hero() {
                     <span className="text-small animate-pulse tracking-[0.3em] opacity-70">
                         {HERO_TEXT.SCROLL_INDICATOR}
                     </span>
-                    <div className="h-[60px] w-px bg-gradient-to-b from-[--color-text-muted] to-transparent" />
+                    <div className="h-[60px] w-px bg-linear-to-b from-[--color-text-muted] to-transparent" />
                 </div>
             </div>
         </section>
